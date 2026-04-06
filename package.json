@@ -1,0 +1,30 @@
+{
+  "name": "softium-library",
+  "private": true,
+  "packageManager": "pnpm@10.33.0",
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "test": "vitest",
+    "lint": "turbo lint",
+    "storybook": "pnpm --filter @softium/docs storybook",
+    "storybook:build": "pnpm --filter @softium/docs build-storybook",
+    "changeset": "changeset",
+    "release": "turbo build && changeset publish"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.27.0",
+    "turbo": "^2.4.0",
+    "typescript": "^5.7.0",
+    "vitest": "^3.1.0",
+    "@testing-library/react": "^16.0.0",
+    "@testing-library/jest-dom": "^6.6.0",
+    "jsdom": "^26.0.0",
+    "prettier": "^3.4.0",
+    "tsup": "^8.4.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0"
+  }
+}

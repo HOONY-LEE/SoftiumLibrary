@@ -1,0 +1,42 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta title="Introduction" />
+
+# Softium UI
+
+Softium UI는 React 기반의 커스텀 컴포넌트 라이브러리입니다.
+
+## 설치
+
+```bash
+# 전체 패키지 설치
+npm install @softium/softium
+
+# 또는 개별 컴포넌트만 설치
+npm install @softium/button @softium/core
+```
+
+## 사용법
+
+```tsx
+import { ThemeProvider, Button } from "@softium/softium";
+
+function App() {
+  return (
+    <ThemeProvider>
+      <Button variant="filled" color="primary">
+        Click me
+      </Button>
+    </ThemeProvider>
+  );
+}
+```
+
+## 패키지 구조
+
+| 패키지 | 설명 |
+|--------|------|
+| `@softium/core` | 테마, 유틸리티 |
+| `@softium/button` | Button 컴포넌트 |
+| `@softium/input` | Input 컴포넌트 |
+| `@softium/softium` | 전체 re-export 패키지 |

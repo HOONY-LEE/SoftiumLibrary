@@ -1,0 +1,96 @@
+export const defaultTokens = {
+  colors: {
+    primary: {
+      50: "#e3f2fd",
+      100: "#bbdefb",
+      200: "#90caf9",
+      300: "#64b5f6",
+      400: "#42a5f5",
+      500: "#2196f3",
+      600: "#1e88e5",
+      700: "#1976d2",
+      800: "#1565c0",
+      900: "#0d47a1",
+    },
+    neutral: {
+      50: "#fafafa",
+      100: "#f5f5f5",
+      200: "#eeeeee",
+      300: "#e0e0e0",
+      400: "#bdbdbd",
+      500: "#9e9e9e",
+      600: "#757575",
+      700: "#616161",
+      800: "#424242",
+      900: "#212121",
+    },
+    error: "#d32f2f",
+    warning: "#ed6c02",
+    success: "#2e7d32",
+    info: "#0288d1",
+    background: {
+      default: "#ffffff",
+      paper: "#f5f5f5",
+    },
+    text: {
+      primary: "#212121",
+      secondary: "#757575",
+      disabled: "#bdbdbd",
+    },
+  },
+  spacing: {
+    xs: "4px",
+    sm: "8px",
+    md: "16px",
+    lg: "24px",
+    xl: "32px",
+    xxl: "48px",
+  },
+  radii: {
+    none: "0px",
+    sm: "4px",
+    md: "8px",
+    lg: "12px",
+    xl: "16px",
+    full: "9999px",
+  },
+  typography: {
+    fontFamily:
+      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
+    fontSize: {
+      xs: "12px",
+      sm: "14px",
+      md: "16px",
+      lg: "18px",
+      xl: "20px",
+      xxl: "24px",
+      xxxl: "32px",
+    },
+    fontWeight: {
+      light: 300,
+      regular: 400,
+      medium: 500,
+      semibold: 600,
+      bold: 700,
+    },
+    lineHeight: {
+      tight: 1.25,
+      normal: 1.5,
+      relaxed: 1.75,
+    },
+  },
+  shadows: {
+    none: "none",
+    sm: "0 1px 2px rgba(0,0,0,0.05)",
+    md: "0 4px 6px rgba(0,0,0,0.07)",
+    lg: "0 10px 15px rgba(0,0,0,0.1)",
+    xl: "0 20px 25px rgba(0,0,0,0.15)",
+  },
+  transitions: {
+    fast: "150ms ease",
+    normal: "250ms ease",
+    slow: "400ms ease",
+  },
+} as const;
+
+export type ThemeTokens = typeof defaultTokens;
