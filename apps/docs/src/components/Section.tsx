@@ -8,15 +8,12 @@ interface SectionProps {
 
 export default function Section({ title, description, children }: SectionProps) {
   return (
-    <section style={{ marginBottom: 48 }}>
-      <h2 style={{ fontSize: 18, fontWeight: 600, marginBottom: description ? 6 : 16, color: "#212121" }}>
-        {title}
-      </h2>
+    <section className="mb-12">
+      <h2 className="text-lg font-semibold text-gray-900 mb-1.5">{title}</h2>
       {description && (
-        <p style={{ fontSize: 14, color: "#757575", marginBottom: 16, lineHeight: 1.6 }}>
-          {description}
-        </p>
+        <p className="text-sm text-gray-500 mb-4 leading-relaxed">{description}</p>
       )}
+      {!description && <div className="mb-4" />}
       {children}
     </section>
   );

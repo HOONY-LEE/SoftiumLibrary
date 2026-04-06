@@ -1,3 +1,9 @@
+@import "tailwindcss";
+
+@source "../../../packages/button/src";
+@source "../../../packages/input/src";
+@source "../../../packages/core/src";
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -10,16 +16,4 @@ html, body, #root {
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  background-color: #f8f9fa;
-  color: #212121;
-  line-height: 1.5;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-button {
-  font-family: inherit;
 }

@@ -10,73 +10,47 @@ interface PropsTableProps {
   rows: PropRow[];
 }
 
-const tableStyle: React.CSSProperties = {
-  width: "100%",
-  borderCollapse: "collapse",
-  fontSize: 13,
-  marginBottom: 32,
-};
-
-const thStyle: React.CSSProperties = {
-  textAlign: "left",
-  padding: "10px 12px",
-  borderBottom: "2px solid #e0e0e0",
-  fontWeight: 600,
-  color: "#616161",
-  fontSize: 12,
-  textTransform: "uppercase",
-  letterSpacing: "0.5px",
-};
-
-const tdStyle: React.CSSProperties = {
-  padding: "10px 12px",
-  borderBottom: "1px solid #f0f0f0",
-  color: "#424242",
-  verticalAlign: "top",
-};
-
-const codeStyle: React.CSSProperties = {
-  fontFamily: "'Fira Code', 'Cascadia Code', monospace",
-  fontSize: 12,
-  background: "#f5f5f5",
-  padding: "2px 6px",
-  borderRadius: 4,
-  color: "#c7254e",
-};
-
 export default function PropsTable({ rows }: PropsTableProps) {
   return (
-    <table style={tableStyle}>
+    <table className="w-full text-sm border-collapse mb-8">
       <thead>
         <tr>
-          <th style={thStyle}>Prop</th>
-          <th style={thStyle}>Type</th>
-          <th style={thStyle}>Default</th>
-          <th style={thStyle}>Description</th>
+          {["Prop", "Type", "Default", "Description"].map((h) => (
+            <th
+              key={h}
+              className="text-left px-3 py-2.5 border-b-2 border-gray-200 text-xs font-semibold text-gray-500 uppercase tracking-wide"
+            >
+              {h}
+            </th>
+          ))}
         </tr>
       </thead>
       <tbody>
         {rows.map((row) => (
-          <tr key={row.name}>
-            <td style={tdStyle}>
-              <code style={codeStyle}>{row.name}</code>
+          <tr key={row.name} className="border-b border-gray-100 last:border-0">
+            <td className="px-3 py-2.5 align-top">
+              <code className="font-mono text-xs bg-gray-100 text-rose-600 px-1.5 py-0.5 rounded">
+                {row.name}
+              </code>
               {row.required && (
-                <span style={{ color: "#d32f2f", marginLeft: 4, fontSize: 11 }}>*</span>
+                <span className="text-red-500 ml-1 text-xs">*</span>
               )}
             </td>
-            <td style={tdStyle}>
-              <code style={{ ...codeStyle, color: "#1976d2", background: "#e3f2fd" }}>
+            <td className="px-3 py-2.5 align-top">
+              <code className="font-mono text-xs bg-blue-50 text-blue-600 px-1.5 py-0.5 rounded">
                 {row.type}
               </code>
             </td>
-            <td style={tdStyle}>
+            <td className="px-3 py-2.5 align-top">
               {row.default ? (
-                <code style={codeStyle}>{row.default}</code>
+                <code className="font-mono text-xs bg-gray-100 text-rose-600 px-1.5 py-0.5 rounded">
+                  {row.default}
+                </code>
               ) : (
-                <span style={{ color: "#bdbdbd" }}>—</span>
+                <span className="text-gray-300">—</span>
               )}
             </td>
-            <td style={tdStyle}>{row.description}</td>
+            <td className="px-3 py-2.5 align-top text-gray-600">{row.description}</td>
           </tr>
         ))}
       </tbody>

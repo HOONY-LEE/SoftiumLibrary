@@ -29,7 +29,8 @@
     "react-dom": ">=18"
   },
   "dependencies": {
-    "@softium/core": "workspace:*"
+    "@softium/core": "workspace:*",
+    "class-variance-authority": "^0.7.0"
   },
   "license": "MIT"
 }

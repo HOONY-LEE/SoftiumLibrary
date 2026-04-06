@@ -12,67 +12,32 @@ const NAV_ITEMS = [
   },
 ];
 
-const sidebarStyle: React.CSSProperties = {
-  width: 240,
-  minHeight: "100vh",
-  background: "#ffffff",
-  borderRight: "1px solid #e0e0e0",
-  display: "flex",
-  flexDirection: "column",
-  flexShrink: 0,
-};
-
-const logoStyle: React.CSSProperties = {
-  padding: "24px 20px 16px",
-  fontSize: 18,
-  fontWeight: 700,
-  color: "#2196f3",
-  borderBottom: "1px solid #f0f0f0",
-  letterSpacing: "-0.3px",
-};
-
-const navStyle: React.CSSProperties = {
-  padding: "16px 0",
-  flex: 1,
-};
-
-const groupLabelStyle: React.CSSProperties = {
-  padding: "8px 20px 4px",
-  fontSize: 11,
-  fontWeight: 600,
-  color: "#9e9e9e",
-  textTransform: "uppercase",
-  letterSpacing: "0.8px",
-};
-
-function navLinkStyle(active: boolean): React.CSSProperties {
-  return {
-    display: "block",
-    padding: "7px 20px",
-    fontSize: 14,
-    color: active ? "#2196f3" : "#424242",
-    fontWeight: active ? 500 : 400,
-    background: active ? "#e3f2fd" : "transparent",
-    borderLeft: active ? "2px solid #2196f3" : "2px solid transparent",
-    transition: "all 100ms ease",
-  };
-}
-
 export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <div style={{ display: "flex", minHeight: "100vh" }}>
-      <aside style={sidebarStyle}>
-        <div style={logoStyle}>⬡ Softium UI</div>
-        <nav style={navStyle}>
+    <div className="flex min-h-screen">
+      <aside className="w-60 min-h-screen bg-white border-r border-gray-200 flex flex-col flex-shrink-0">
+        <div className="px-5 py-6 text-lg font-bold text-blue-500 tracking-tight border-b border-gray-100">
+          ⬡ Softium UI
+        </div>
+
+        <nav className="flex-1 py-4">
           {NAV_ITEMS.map((item) =>
             "group" in item ? (
               <div key={item.group}>
-                <div style={groupLabelStyle}>{item.group}</div>
+                <div className="px-5 py-2 text-[11px] font-semibold text-gray-400 uppercase tracking-widest">
+                  {item.group}
+                </div>
                 {(item.items ?? []).map((sub) => (
                   <NavLink
                     key={sub.path}
                     to={sub.path}
-                    style={({ isActive }) => navLinkStyle(isActive)}
+                    className={({ isActive }) =>
+                      `block px-5 py-1.5 text-sm transition-all duration-100 border-l-2 ${
+                        isActive
+                          ? "text-blue-500 font-medium bg-blue-50 border-blue-500"
+                          : "text-gray-600 border-transparent hover:text-gray-900 hover:bg-gray-50"
+                      }`
+                    }
                   >
                     {sub.label}
                   </NavLink>
@@ -83,19 +48,26 @@ export default function Layout({ children }: { children: ReactNode }) {
                 key={item.path}
                 to={item.path}
                 end
-                style={({ isActive }) => navLinkStyle(isActive)}
+                className={({ isActive }) =>
+                  `block px-5 py-1.5 text-sm transition-all duration-100 border-l-2 ${
+                    isActive
+                      ? "text-blue-500 font-medium bg-blue-50 border-blue-500"
+                      : "text-gray-600 border-transparent hover:text-gray-900 hover:bg-gray-50"
+                  }`
+                }
               >
                 {item.label}
               </NavLink>
             ),
           )}
         </nav>
-        <div style={{ padding: "16px 20px", fontSize: 12, color: "#bdbdbd", borderTop: "1px solid #f0f0f0" }}>
+
+        <div className="px-5 py-4 text-xs text-gray-300 border-t border-gray-100">
           v0.1.0
         </div>
       </aside>
 
-      <main style={{ flex: 1, padding: "40px 48px", maxWidth: 900 }}>
+      <main className="flex-1 px-12 py-10 max-w-4xl">
         {children}
       </main>
     </div>

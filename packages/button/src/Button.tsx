@@ -1,6 +1,54 @@
 import { forwardRef } from "react";
-import { useTheme, classNames } from "@softium/core";
+import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from "@softium/core";
 import type { ButtonProps } from "./Button.types";
+
+const buttonVariants = cva(
+  "inline-flex items-center justify-center font-medium rounded-lg transition-all duration-150 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed select-none",
+  {
+    variants: {
+      variant: {
+        filled: "border border-transparent",
+        outlined: "border bg-transparent",
+        ghost: "border-transparent bg-transparent",
+      },
+      size: {
+        sm: "h-8 px-3 text-sm gap-1",
+        md: "h-10 px-4 text-base gap-2",
+        lg: "h-12 px-6 text-lg gap-2",
+      },
+      color: {
+        primary: "",
+        neutral: "",
+        error: "",
+        success: "",
+      },
+    },
+    compoundVariants: [
+      { variant: "filled", color: "primary", className: "bg-blue-500 text-white hover:bg-blue-600 active:bg-blue-700" },
+      { variant: "filled", color: "neutral", className: "bg-gray-700 text-white hover:bg-gray-800 active:bg-gray-900" },
+      { variant: "filled", color: "error",   className: "bg-red-600 text-white hover:bg-red-700 active:bg-red-800" },
+      { variant: "filled", color: "success", className: "bg-green-700 text-white hover:bg-green-800 active:bg-green-900" },
+
+      { variant: "outlined", color: "primary", className: "border-blue-500 text-blue-500 hover:bg-blue-50 active:bg-blue-100" },
+      { variant: "outlined", color: "neutral", className: "border-gray-700 text-gray-700 hover:bg-gray-50 active:bg-gray-100" },
+      { variant: "outlined", color: "error",   className: "border-red-600 text-red-600 hover:bg-red-50 active:bg-red-100" },
+      { variant: "outlined", color: "success", className: "border-green-700 text-green-700 hover:bg-green-50 active:bg-green-100" },
+
+      { variant: "ghost", color: "primary", className: "text-blue-500 hover:bg-blue-50 active:bg-blue-100" },
+      { variant: "ghost", color: "neutral", className: "text-gray-700 hover:bg-gray-100 active:bg-gray-200" },
+      { variant: "ghost", color: "error",   className: "text-red-600 hover:bg-red-50 active:bg-red-100" },
+      { variant: "ghost", color: "success", className: "text-green-700 hover:bg-green-50 active:bg-green-100" },
+    ],
+    defaultVariants: {
+      variant: "filled",
+      size: "md",
+      color: "primary",
+    },
+  },
+);
+
+export type ButtonVariantProps = VariantProps<typeof buttonVariants>;
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
@@ -14,93 +62,24 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       endIcon,
       disabled,
       children,
-      style,
       className,
       ...rest
     },
     ref,
   ) => {
-    const theme = useTheme();
-
-    const colorMap = {
-      primary: theme.colors.primary[500],
-      neutral: theme.colors.neutral[700],
-      error: theme.colors.error,
-      success: theme.colors.success,
-    };
-
-    const sizeMap = {
-      sm: {
-        padding: `${theme.spacing.xs} ${theme.spacing.sm}`,
-        fontSize: theme.typography.fontSize.sm,
-        height: "32px",
-        gap: "4px",
-      },
-      md: {
-        padding: `${theme.spacing.sm} ${theme.spacing.md}`,
-        fontSize: theme.typography.fontSize.md,
-        height: "40px",
-        gap: "8px",
-      },
-      lg: {
-        padding: `${theme.spacing.sm} ${theme.spacing.lg}`,
-        fontSize: theme.typography.fontSize.lg,
-        height: "48px",
-        gap: "8px",
-      },
-    };
-
-    const baseColor = colorMap[color];
-    const sizeTokens = sizeMap[size];
-
-    const variantStyles: Record<string, React.CSSProperties> = {
-      filled: {
-        backgroundColor: baseColor,
-        color: "#ffffff",
-        border: "none",
-      },
-      outlined: {
-        backgroundColor: "transparent",
-        color: baseColor,
-        border: `1px solid ${baseColor}`,
-      },
-      ghost: {
-        backgroundColor: "transparent",
-        color: baseColor,
-        border: "none",
-      },
-    };
-
-    const composedStyle: React.CSSProperties = {
-      display: "inline-flex",
-      alignItems: "center",
-      justifyContent: "center",
-      gap: sizeTokens.gap,
-      padding: sizeTokens.padding,
-      fontSize: sizeTokens.fontSize,
-      height: sizeTokens.height,
-      fontFamily: theme.typography.fontFamily,
-      fontWeight: theme.typography.fontWeight.medium,
-      lineHeight: theme.typography.lineHeight.normal,
-      borderRadius: theme.radii.md,
-      cursor: disabled || loading ? "not-allowed" : "pointer",
-      opacity: disabled || loading ? 0.6 : 1,
-      transition: `all ${theme.transitions.fast}`,
-      width: fullWidth ? "100%" : "auto",
-      ...variantStyles[variant],
-      ...style,
-    };
-
     return (
       <button
         ref={ref}
-        className={classNames("softium-button", className)}
+        className={cn(
+          buttonVariants({ variant, size, color }),
+          fullWidth && "w-full",
+          className,
+        )}
         disabled={disabled || loading}
-        style={composedStyle}
         {...rest}
       >
         {loading ? (
-          <span style={{ display: "inline-flex", animation: "spin 1s linear infinite" }}>⟳</span>
+          <span className="animate-spin inline-block">⟳</span>
         ) : (
           startIcon
         )}
