@@ -15,12 +15,13 @@
         "types": "./dist/index.d.ts",
         "default": "./dist/index.js"
       }
-    }
+    },
+    "./styles": "./dist/styles.css"
   },
   "files": ["dist"],
-  "sideEffects": false,
+  "sideEffects": ["./dist/styles.css"],
   "scripts": {
-    "build": "tsup",
+    "build": "tsup && tailwindcss -i src/styles.css -o dist/styles.css --minify",
     "dev": "tsup --watch",
     "lint": "tsc --noEmit"
   },
@@ -31,6 +32,10 @@
   "dependencies": {
     "@softium/core": "workspace:*",
     "class-variance-authority": "^0.7.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.0",
+    "tailwindcss": "^4.1.0"
   },
   "license": "MIT"
 }
